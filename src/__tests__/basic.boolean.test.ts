@@ -1,4 +1,4 @@
-import { TBoolean } from '../template';
+import { TBoolean } from '../basic';
 
 test('True validates', () => {
     expect(TBoolean.valid(true)).toBe(true);

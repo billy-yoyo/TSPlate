@@ -1,5 +1,6 @@
-import { transform } from 'typescript';
-import { Template, TObject, TString } from '../template';
+import Template from '../template';
+import { TString } from '../basic';
+import TObject from '../object';
 
 class Name { 
     public name: string;

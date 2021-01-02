@@ -1,4 +1,4 @@
-import { TString } from '../template';
+import { TString } from '../basic';
 
 test('Strings validate', () => {
     expect(TString.valid('hello')).toBe(true);

@@ -1,4 +1,4 @@
-import { TEnum } from '../template';
+import TEnum from '../enum';
 
 const TExample = TEnum
         .add('hello')

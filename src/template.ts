@@ -1,44 +1,10 @@
-export interface Template<R> {
+export default interface Template<R> {
   valid: (o: any) => boolean;
   toModel: (o: any) => R;
   toTransit: (t: R) => any;
 }
 
-export const TString: Template<string> = {
-  valid: (o: any) => typeof o === 'string',
-  toModel: (o: any) => (o ? o.toString() : ''),
-  toTransit: (s: string) => s,
-};
 
-export const TInt: Template<number> = {
-  valid: (o: any) => typeof o === 'number' && Number.isInteger(o),
-  toModel: (o: any) => o,
-  toTransit: (i: number) => i,
-};
-
-export const TFloat: Template<number> = {
-  valid: (o: any) => typeof o === 'number',
-  toModel: (o: any) => o,
-  toTransit: (f: number) => f,
-};
-
-export const TBoolean: Template<boolean> = {
-  valid: (o: any) => typeof o === 'boolean',
-  toModel: (o: any) => o,
-  toTransit: (b: boolean) => b,
-};
-
-export const TBaseObject: Template<{}> = {
-  valid: (o: any) => typeof o === 'object',
-  toModel: (o: any) => o,
-  toTransit: (o: {}) => o,
-};
-
-export const TVoid: Template<void> = {
-  valid: (o: any) => false,
-  toModel: (o: any) => null,
-  toTransit: (o: void) => o,
-};
 
 export function TArray<R>(item: Template<R>): Template<R[]> {
   return {
@@ -112,6 +78,20 @@ function createEnumBuilder<R>(base: Template<R>): TEnum<R> {
 
 export const TEnum = createEnumBuilder(TVoid);
 
+export function TTransform<O, N>(
+    old: Template<O>,
+    oldToNew: (_old: O) => N, 
+    newToOld: (_new: N) => O
+  ): Template<N> {
+    return {
+        valid: old.valid,
+        toModel: (o: any) => oldToNew(old.toModel(o)),
+        toTransit: (_new: N) => old.toTransit(newToOld(_new))
+    };
+}
+
+
+
 export type unwrapTemplate<TT extends Template<any>> = TT extends Template<infer R> ? R : never;
 
 const T = {
@@ -124,6 +104,7 @@ const T = {
   Array: TArray,
   Object: TObject,
   Enum: TEnum,
+  Transform: TTransform
 };
 
 export default T;

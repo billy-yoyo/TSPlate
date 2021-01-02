@@ -1,4 +1,6 @@
-import { Template, TArray, TString } from '../template';
+import Template from '../template';
+import { TString } from '../basic';
+import TArray from '../array';
 
 const TStringArray = TArray(TString);
 

@@ -1,4 +1,4 @@
-import { TInt } from '../template';
+import { TInt } from '../basic';
 
 test('Integers validate', () => {
     expect(TInt.valid(3)).toBe(true);

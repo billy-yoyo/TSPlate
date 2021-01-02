@@ -1,4 +1,4 @@
-import { TFloat } from '../template';
+import { TFloat } from '../basic';
 
 test('Integers validate', () => {
     expect(TFloat.valid(3)).toBe(true);
