@@ -32,44 +32,38 @@ class Example {
     }
 }
 
-// TExample has type Template<Example>
-const TExample = T.Class(Example)
-    // define the templates for the constructor properties
-    // the string is the key within a class instance
-    .add('name', T.String) 
-    .add('age', T.Int)
-    .build();
+// TExample has type Template<Example, any>
+// second parameter defines the instance keys and templates for constructor parameters
+// the true transit type of this template would be {name: string, age: number}
+const TExample = T.Class(Example, [['name', T.String], ['age', T.Int]]);
 
 
 // the constructor properties are type checked against their templates
-// e.g., the following will highlight a type error
-const TExample2 = T.Class(Example)
-    .add('name', T.String) // fine
-    .add('age', T.String) // will throw an error because T.String doesn't match type number
-    .build();
+// e.g., the following will highlight a type error on ['age', T.String]
+const TExample2 = T.Class(Example, [['name', T.String], ['age', T.String]]);
 ```
-
 
 ### Validating JSON
 
 ```ts
 import T from 'tsplate';
 
-const TColour = T.Enum
-    .add('red')
-    .add('blue')
-    .add('white')
-    .add('black')
-    .add('grey');
+// TColour has type Template<'red' | 'blue' | 'green', string>
+const TColour = T.Enum('red', 'blue', 'green');
 
-const TPerson = T.Object
-    .add('name', T.String)
-    .add('age', T.Int);
+// TPerson has type Template<{name: string, age: number}, {name: string, age: number}> 
+const TPerson = T.Object({
+    name: T.String,
+    age: T.Int
+});
 
-const TCar = T.Object
-    .add('name', T.String)
-    .add('colour', TColour)
-    .add('passengers', T.Array(TPerson));
+// TCar has type Template<{name: string, colour: 'red' | 'blue' | 'green', passengers: {name: string, age: number}[]}, ...> 
+// (here ... will be the same as the first type argument)
+const TCar = T.Object({
+    name: T.String,
+    colour: TColour,
+    passengers: T.Array(TPerson)
+});
 
 const data = JSON.parse(`
 {
@@ -108,9 +102,9 @@ class Name {
     }
 }
 
-const TName: Template<Name> = {
+const TName: Template<Name, string> = {
     valid: T.String.valid,
-    toModel: (o: any) => new Name(o),
+    toModel: (o: string) => new Name(o),
     toTransit: (name: Name) => name.name
 };
 

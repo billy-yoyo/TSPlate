@@ -1,8 +1,6 @@
 import TEnum from '../enum';
 
-const TExample = TEnum
-        .add('hello')
-        .add('world');
+const TExample = TEnum('hello', 'world');
 
 test('Strings within enum should validate', () => {
     expect(TExample.valid('hello')).toBe(true);

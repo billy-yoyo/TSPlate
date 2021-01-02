@@ -1,45 +1,64 @@
 import Template from './template';
+import { TString, TInt } from './basic';
+import { TOptional } from './helper';
 
-const TBaseObject: Template<{}> = {
-    valid: (o: any) => typeof o === 'object',
-    toModel: (o: any) => o,
-    toTransit: (o: {}) => o,
+type ModelType<TT> = TT extends Template<infer M, any> ? M : never;
+type TransitType<TT> = TT extends Template<any, infer T> ? T : never;
+
+export type KeysOfType<T, U> = { [K in keyof T]: T[K] extends U ? K : never }[keyof T];
+export type RequiredKeys<T> = Exclude<KeysOfType<T, Exclude<T[keyof T], undefined>>, undefined>;
+export type OptionalKeys<T> = Exclude<keyof T, RequiredKeys<T>>;
+
+type SeperateRequiredAndOptionalTypes<O> = {
+  [K in RequiredKeys<O>]: O[K]
+} & {
+  [K in OptionalKeys<O>]?: O[K]
+}
+
+type UnwrapModelTypes<TT extends {[key: string]: Template<any, any>}> = SeperateRequiredAndOptionalTypes<{
+  [K in keyof TT]: ModelType<TT[K]>
+}>;
+type UnwrapTransitTypes<TT extends {[key: string]: Template<any, any>}> = SeperateRequiredAndOptionalTypes<{
+  [K in keyof TT]: TransitType<TT[K]>
+}>;
+
+function mapObject<T>(object: T, func: (key: string) => any) {
+  return Object.keys(object).reduce((o, key) => ({
+    ...o,
+    [key]: func(key) 
+  }), {});
+}
+
+export default function TObject<TT extends {[key: string]: Template<any, any>}, M extends UnwrapModelTypes<TT>, T extends UnwrapTransitTypes<TT>>(
+  template: TT
+): Template<M, T> {
+  return {
+    valid: (o: any): o is T => 
+      typeof o === 'object' && Object.keys(template).every(name => template[name].valid(o[name])),
+    toModel: (o: T): M => 
+      mapObject(o, name => template[name].toModel((o as any)[name])) as M,
+    toTransit: (m: M): T => 
+      mapObject(m, name => template[name].toTransit((m as any)[name])) as T
+  };
+}
+
+class Name { 
+  public name: string;
+  constructor(name: string) {
+      this.name = name;
+  } 
+}
+
+const TName: Template<Name, string> = {
+  valid: TString.valid,
+  toModel: (o: any) => new Name(o),
+  toTransit: (name: Name) => name.name
 };
 
-function TObjectUnion<R, K extends string, V>(
-  base: Template<R>,
-  key: K,
-  value: Template<V>,
-): Template<R & { [k in K]: V }> {
-  return {
-    valid: (o: any) => base.valid(o) && o.hasOwnProperty(key) && value.valid(o[key]),
-    toModel: (o: any) => {
-      const extension: { [k in K]: V } = { [key]: value.toModel(o[key]) } as { [k in K]: V };
-      return { ...base.toModel(o), ...extension };
-    },
-    toTransit: (data: R & { [k in K]: V }) => ({
-      ...base.toTransit(data as R),
-      [key]: value.toTransit((data as any)[key]),
-    }),
-  };
-}
+const TExample = TObject({
+  name: TName,
+  message: TString,
+  age: TOptional(TInt)
+});
 
-interface TObject<R> extends Template<R> {
-  add<K extends string, V>(key: K, value: Template<V>): TObject<R & { [key in K]: V }>;
-}
-
-function createObjectBuilder<R>(base: Template<R>): TObject<R> {
-  function add<K extends string, V>(key: K, value: Template<V>): TObject<R & { [k in K]: V }> {
-    return createObjectBuilder(TObjectUnion(base, key, value));
-  }
-
-  return {
-    valid: base.valid,
-    toModel: base.toModel,
-    toTransit: base.toTransit,
-    add,
-  };
-}
-
-const TObject = createObjectBuilder(TBaseObject);
-export default TObject;
+const example = TExample.toTransit({name: new Name('hello'), message: 'test'})

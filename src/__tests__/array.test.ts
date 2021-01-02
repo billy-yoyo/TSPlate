@@ -11,7 +11,7 @@ class Name {
     } 
 }
 
-const TName: Template<Name> = {
+const TName: Template<Name, string> = {
     valid: TString.valid,
     toModel: (o: any) => new Name(o),
     toTransit: (name: Name) => name.name

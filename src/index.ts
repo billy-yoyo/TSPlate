@@ -9,10 +9,15 @@ import {
 import TArray from './array';
 import TObject from './object';
 import TEnum from './enum';
-import TMap from './map';
+import {
+  TOptional,
+  TMap,
+  TUnion
+} from './helper';
 import TClass from './class';
 
-export type unwrapTemplate<TT extends Template<any>> = TT extends Template<infer R> ? R : never;
+export type ModelType<TT extends Template<any, any>> = TT extends Template<infer M, any> ? M : never;
+export type TransitType<TT extends Template<any, any>> = TT extends Template<any, infer T> ? T : never;
 
 const T = {
   Void: TVoid,
@@ -23,8 +28,10 @@ const T = {
   Array: TArray,
   Object: TObject,
   Enum: TEnum,
+  Class: TClass,
   Map: TMap,
-  Class: TClass
+  Optional: TOptional,
+  Union: TUnion
 };
 
 export default T;

@@ -1,9 +1,9 @@
 import Template from './template';
 
-export default function TArray<R>(item: Template<R>): Template<R[]> {
+export default function TArray<R, T>(item: Template<R, T>): Template<R[], T[]> {
   return {
-    valid: (o: any) => Array.isArray(o) && o.every(item.valid),
-    toModel: (o: any) => (o as any[]).map(item.toModel),
+    valid: (o: any): o is T[] => Array.isArray(o) && o.every(item.valid),
+    toModel: (o: T[]) => o.map(item.toModel),
     toTransit: (items: R[]) => items.map(item.toTransit),
   };
 }

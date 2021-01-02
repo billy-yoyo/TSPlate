@@ -1,4 +1,4 @@
-import TMap from '../map';
+import { TMap } from '../helper';
 import TObject from '../object';
 import { TString, TInt } from '../basic';
 
@@ -13,9 +13,7 @@ class Example {
 }
 
 const TExample = TMap(
-  TObject
-    .add('name', TString)
-    .add('age', TInt),
+  TObject({name: TString, age: TInt}),
   (old) => new Example(old.name, old.age),
   (_new) => ({ name: _new.name, age: _new.age })
 );

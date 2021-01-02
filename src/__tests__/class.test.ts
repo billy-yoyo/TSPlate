@@ -10,10 +10,7 @@ class Example {
   }
 }
 
-const TExample = TClass(Example)
-  .add('name', TString)
-  .add('age', TInt)
-  .build();
+const TExample = TClass(Example, [['name', TString], ['age', TInt]]);
 
 test('Validates if all constructor properties are present and correct', () => {
   expect(TExample.valid({name: 'hello', age: 3})).toBe(true);

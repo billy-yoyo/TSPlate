@@ -18,3 +18,6 @@ A template defines three properties (here `M` is the type of your model)
 * `toTransit(model: M): any` - a function which will transform a model into a transit
 
 
+### [Next - Understanding templates →](./understanding-templates.md)
+### [← Previous - Introduction](./introduction.md)
+### [🏠 Home](./introduction.md)

@@ -19,14 +19,18 @@ TSPlate is very implementation agnostic. It can be easily slotted into many diff
 
 It also doesn't come with any dependancies, with TSPlate what-you-see-is-what-you-get. The package size is just a few KB and plans to stay that way. 
 
-## Starting with TSPlate
+## Index
 
-1. [Understanding templates](understanding-templates.md)
-2. [Creating a basic template](creating-a-basic-template.md)
-4. [Built-in templates](built-in-templates.md)
-  1. [Basic types](templates/basic-types.md)
-  2. [Arrays](templates/arrays.md)
-  3. [Enums](templates/enums.md)
-  4. [Objects](templates/objects.md)
-  5. [Classes](templates/classes.md)
-  6. [Map](templates/map.md)
+1. [Understanding templates](./understanding-templates.md)
+2. [Creating a basic template](./creating-a-basic-template.md)
+3. [Built-in templates](./built-in-templates.md)
+    1. [Basic types](./templates/basic-types.md)
+    2. [Arrays](./templates/arrays.md)
+    3. [Enums](./templates/enums.md)
+    4. [Objects](./templates/objects.md)
+    5. [Classes](./templates/classes.md)
+    6. [Map](./templates/map.md)
+
+
+### [Next - Understanding templates →](./understanding-templates.md)
+### [← Home](./introduction.md)
