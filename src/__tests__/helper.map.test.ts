@@ -13,18 +13,18 @@ class Example {
 }
 
 const TExample = TMap(
-  TObject({name: TString, age: TInt}),
+  TObject({ name: TString, age: TInt }),
   (old) => new Example(old.name, old.age),
-  (_new) => ({ name: _new.name, age: _new.age })
+  (_new) => ({ name: _new.name, age: _new.age }),
 );
 
 test('Map validates based on underlying validation', () => {
   // compiled into single test, since if individual components of these are failing
   // it is likely just an issue with TObject
   expect(TExample.valid({})).toBe(false);
-  expect(TExample.valid({name: 'hello'})).toBe(false);
-  expect(TExample.valid({name: 'hello', age: 'world'})).toBe(false);
-  expect(TExample.valid({name: 'hello', age: 3})).toBe(true);
+  expect(TExample.valid({ name: 'hello' })).toBe(false);
+  expect(TExample.valid({ name: 'hello', age: 'world' })).toBe(false);
+  expect(TExample.valid({ name: 'hello', age: 3 })).toBe(true);
 });
 
 test('Map converts to transit object of underlying type', () => {
@@ -38,10 +38,9 @@ test('Map converts to transit object of underlying type', () => {
 });
 
 test('Transit objects get mapped to map type', () => {
-  const model = TExample.toModel({name: 'hello', age: 3});
+  const model = TExample.toModel({ name: 'hello', age: 3 });
 
   expect(model).toBeInstanceOf(Example);
   expect(model.name).toBe('hello');
   expect(model.age).toBe(3);
 });
-

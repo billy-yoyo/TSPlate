@@ -7,4 +7,3 @@ export default function TArray<R, T>(item: Template<R, T>): Template<R[], T[]> {
     toTransit: (items: R[]) => items.map(item.toTransit),
   };
 }
-  

@@ -1,23 +1,13 @@
 import Template from './template';
-import { 
-  TVoid,
-  TString,
-  TInt,
-  TFloat,
-  TBoolean
-} from './basic';
+import { TVoid, TString, TInt, TFloat, TBoolean } from './basic';
 import TArray from './array';
 import TObject from './object';
 import TEnum from './enum';
-import {
-  TOptional,
-  TMap,
-  TUnion
-} from './helper';
+import { TOptional, TMap, TUnion } from './helper';
 import TClass from './class';
 
 export type ModelType<TT extends Template<any, any>> = TT extends Template<infer M, any> ? M : never;
-export type TransitType<TT extends Template<any, any>> = TT extends Template<any, infer T> ? T : never;
+export type TransitType<TT extends Template<any, any>> = TT extends Template<any, infer MT> ? MT : never;
 
 const T = {
   Void: TVoid,
@@ -31,7 +21,7 @@ const T = {
   Class: TClass,
   Map: TMap,
   Optional: TOptional,
-  Union: TUnion
+  Union: TUnion,
 };
 
 export default T;

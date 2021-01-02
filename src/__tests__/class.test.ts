@@ -10,19 +10,22 @@ class Example {
   }
 }
 
-const TExample = TClass(Example, [['name', TString], ['age', TInt]]);
+const TExample = TClass(Example, [
+  ['name', TString],
+  ['age', TInt],
+]);
 
 test('Validates if all constructor properties are present and correct', () => {
-  expect(TExample.valid({name: 'hello', age: 3})).toBe(true);
+  expect(TExample.valid({ name: 'hello', age: 3 })).toBe(true);
 });
 
-test('Doesn\'t validate if some constructor properties are missing', () => {
-  expect(TExample.valid({name: 'hello'})).toBe(false);
+test("Doesn't validate if some constructor properties are missing", () => {
+  expect(TExample.valid({ name: 'hello' })).toBe(false);
 });
 
-test('Doesn\'t validate if constructor properties fail validation', () => {
-  expect(TExample.valid({name: 'hello', age: 'world'})).toBe(false);
-}); 
+test("Doesn't validate if constructor properties fail validation", () => {
+  expect(TExample.valid({ name: 'hello', age: 'world' })).toBe(false);
+});
 
 test('Class instances transit as objects with constructor parameter names', () => {
   const transit = TExample.toTransit(new Example('hello', 3));
@@ -35,7 +38,7 @@ test('Class instances transit as objects with constructor parameter names', () =
 });
 
 test('Transit objects will convert to instances of the class', () => {
-  const model = TExample.toModel({name: 'hello', age: 3});
+  const model = TExample.toModel({ name: 'hello', age: 3 });
 
   expect(model).toBeInstanceOf(Example);
   expect(model.name).toBe('hello');
