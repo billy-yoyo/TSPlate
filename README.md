@@ -14,6 +14,10 @@ Unifies the definition of model types with model validation, with easy support f
 
 It can easily be added to an existing project using the class template interface (`T.Class`)
 
+## Documentation
+
+For a brief of the What, Why & How of TSPlate, take a look at [the documentation](./docs/introduction.md)
+
 ## Examples
 
 You can run any of these examples by cloning this repo any using `npm run example [filename].js`. See the `examples` folder for filenames. For example, `npm run example basic-validation.js`.

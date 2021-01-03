@@ -48,4 +48,3 @@ It also doesn't come with any dependancies, with TSPlate what-you-see-is-what-yo
 5. [Examples](./examples.md)
 
 ### [Next - Understanding templates →](./understanding-templates.md)
-### [← Home](./introduction.md)
