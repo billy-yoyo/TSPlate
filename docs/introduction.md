@@ -1,6 +1,20 @@
 
 # TSPlate
 
+## What is TSPlate
+
+TSPlate is a templating engine. At its core, it is simply the following interface
+
+```ts
+interface Template<M, T> {
+  valid: (o: any) => o is T;
+  toModel: (o: T) => M;
+  toTransit: (t: M) => T;
+}
+```
+
+Everything else in this library is either a pre-defined template, or a helper function to create templates. This approach to templates is not new or radical, but it is simple and effective. The value TSPlate provides is in the API the helper functions give in creating type-safe models.
+
 ## What do I use TSPlate for?
 
 TSPlate acts as a templating engine to validate transit objects (e.g. JSON data) and convert that into your internal models (e.g. Classes). It is build completely agnostic of a specific implementation, and simply focuses on giving a clean interface to assert types and properties.
@@ -21,16 +35,17 @@ It also doesn't come with any dependancies, with TSPlate what-you-see-is-what-yo
 
 ## Index
 
-1. [Understanding templates](./understanding-templates.md)
-2. [Creating a basic template](./creating-a-basic-template.md)
-3. [Built-in templates](./built-in-templates.md)
+1. [Introduction](./introduction.md)
+2. [Understanding templates](./understanding-templates.md)
+3. [Creating a basic template](./creating-a-basic-template.md)
+4. [Built-in templates](./built-in-templates.md)
     1. [Basic types](./templates/basic-types.md)
     2. [Arrays](./templates/arrays.md)
     3. [Enums](./templates/enums.md)
     4. [Objects](./templates/objects.md)
     5. [Classes](./templates/classes.md)
     6. [Map](./templates/map.md)
-
+5. [Examples](./examples.md)
 
 ### [Next - Understanding templates →](./understanding-templates.md)
 ### [← Home](./introduction.md)
