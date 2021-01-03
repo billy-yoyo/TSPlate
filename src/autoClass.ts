@@ -39,21 +39,26 @@ export function constructor<K extends readonly string[]>(...args: K) {
 export default function TAutoClass<C extends new (...args: any[]) => any>(cls: C): Template<InstanceType<C>, any> {
   const tsp = (cls as unknown) as TSPTemplates;
 
-  if (tsp.$TSPTemplates === undefined || tsp.$TSPConstructor === undefined) {
+  const templates: { [key: string]: Template<any, any> } =
+    tsp.$TSPTemplates === undefined ? ((cls.prototype as unknown) as TSPTemplates).$TSPTemplates : tsp.$TSPTemplates;
+
+  const constructorArgs = tsp.$TSPConstructor;
+
+  if (templates === undefined || constructorArgs === undefined) {
     return TClass(cls, [] as any);
   } else {
-    if (tsp.$TSPConstructor === undefined) {
+    if (constructorArgs === undefined) {
       throw Error(
         'Attempted to use auto class on non-template class. Must decorate class with the @templateConstructor decorator to use AutoClass',
       );
     }
 
-    if (tsp.$TSPConstructor.some((key) => tsp.$TSPTemplates[key] === undefined)) {
+    if (constructorArgs.some((key) => templates[key] === undefined)) {
       throw Error(
         "Template constructor specifies properties which don't have templates defined. Specify property templates using the @template(Template) decorator.",
       );
     }
 
-    return TClass(cls, tsp.$TSPConstructor.map((key) => [key, tsp.$TSPTemplates[key]]) as any);
+    return TClass(cls, constructorArgs.map((key) => [key, templates[key]]) as any);
   }
 }
