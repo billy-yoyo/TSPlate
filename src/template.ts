@@ -3,3 +3,7 @@ export default interface Template<M, T> {
   toModel: (o: T) => M;
   toTransit: (t: M) => T;
 }
+
+export function isTemplate(t: any): t is Template<any, any> {
+  return t.valid !== undefined && t.toModel !== undefined && t.toTransit !== undefined;
+}

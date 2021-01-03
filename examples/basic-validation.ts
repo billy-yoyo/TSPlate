@@ -1,20 +1,17 @@
 import T from '../src';
 
-const TColour = T.Enum
-    .add('red')
-    .add('blue')
-    .add('white')
-    .add('black')
-    .add('grey');
+const TColour = T.Enum('red', 'green', 'blue');
 
-const TPerson = T.Object
-    .add('name', T.String)
-    .add('age', T.Int);
+const TPerson = T.Object({
+    name: T.String,
+    age: T.Int
+});
 
-const TCar = T.Object
-    .add('name', T.String)
-    .add('colour', TColour)
-    .add('passengers', T.Array(TPerson));
+const TCar = T.Object({
+    name: T.String,
+    colour: TColour,
+    passengers: T.Array(TPerson)
+});
 
 const data = JSON.parse(`
 {

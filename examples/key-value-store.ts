@@ -7,16 +7,16 @@ interface Store {
 
 class TemplateStore<T> {
     private store: Store;
-    private template: Template<T>;
+    private template: Template<T, any>;
     private prefix: string;
 
-    constructor(store: Store, template: Template<T>, prefix: string) {
+    constructor(store: Store, template: Template<T, any>, prefix: string) {
         this.store = store;
         this.template = template;
         this.prefix = prefix;
     }
 
-    async get(key: string): Promise<T> {
+    async get(key: string): Promise<T | undefined> {
         const value = await this.store.get(this.prefix + key);
         const transit = JSON.parse(value);
 
@@ -43,11 +43,7 @@ class Person {
     }
 }
 
-const TPerson = T.Class(Person)
-    .add('id', T.String)
-    .add('name', T.String)
-    .add('age', T.Int)
-    .build();
+const TPerson = T.Class(Person, [['id', T.String], ['name', T.String], ['age', T.Int]]);
 
 const store = {} as Store;
 const personStore = new TemplateStore<Person>(store, TPerson, 'person/');
@@ -56,7 +52,9 @@ async function example() {
     const person: Person = new Person('123', 'name', 3);
     await personStore.set(person.id, person);
 
-    const fetched: Person = await personStore.get('123');
-    fetched.age += 1;
-    await personStore.set(fetched.id, fetched);
+    const fetched: Person | undefined = await personStore.get('123');
+    if (fetched) {
+        fetched.age += 1;
+        await personStore.set(fetched.id, fetched);
+    }
 }
