@@ -10,7 +10,7 @@ npm install tsplate
 
 ## Why TSPlate?
 
-Unifies the definition of model types with model validation, with easy support for custom validation rules. Ontop of this it is extremely lightweight, with no dependencies and a package size of just 2.3kb.
+Unifies the definition of model types with model validation, with easy support for custom validation rules. Ontop of this it is extremely lightweight, with no dependencies and a package size of just a few kb.
 
 It can easily be added to an existing project using the class template interface (`T.Class`)
 
