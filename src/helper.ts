@@ -16,6 +16,14 @@ export function TMap<O, N, T>(old: Template<O, T>, oldToNew: (_old: O) => N, new
   };
 }
 
+export function TJoin<M, S, T>(left: Template<M, S>, right: Template<S, T>): Template<M, T> {
+  return {
+    valid: right.valid,
+    toModel: (o: T) => left.toModel(right.toModel(o)),
+    toTransit: (m: M) => right.toTransit(left.toTransit(m)),
+  };
+}
+
 export function TUnion<M1, T1, M2, T2>(
   left: Template<M1, T1>,
   right: Template<M2, T2>,

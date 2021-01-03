@@ -1,14 +1,14 @@
 import Template from './template';
 
 type RemoveNames<T extends any[]> = [any, ...T] extends [any, ...infer U] ? U : never;
-type NamedTemplates<A> = {
-  [K in keyof A]: [string, Template<A[K], any>];
+type NamedTemplates<A, X> = {
+  [K in keyof A]: [X, Template<A[K], any>];
 };
 type NamedTemplate = [string, Template<any, any>];
 
 export default function TClass<
   C extends new (...args: any[]) => any,
-  T extends NamedTemplates<RemoveNames<ConstructorParameters<C>>>
+  T extends NamedTemplates<RemoveNames<ConstructorParameters<C>>, keyof InstanceType<C>>
 >(cls: C, templates: T): Template<InstanceType<C>, any> {
   const templatearr = (templates as unknown) as NamedTemplate[];
 
