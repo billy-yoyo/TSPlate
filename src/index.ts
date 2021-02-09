@@ -6,6 +6,7 @@ import TEnum from './enum';
 import { TOptional, TMap, TUnion } from './helper';
 import TClass from './class';
 import TAutoClass, { template, constructor } from './autoClass';
+import TRecord from './record';
 
 export type ModelType<TT extends Template<any, any>> = TT extends Template<infer M, any> ? M : never;
 export type TransitType<TT extends Template<any, any>> = TT extends Template<any, infer MT> ? MT : never;
@@ -18,6 +19,7 @@ const T = {
   Boolean: TBoolean,
   Array: TArray,
   Object: TObject,
+  Record: TRecord,
   Enum: TEnum,
   Class: TClass,
   Map: TMap,
