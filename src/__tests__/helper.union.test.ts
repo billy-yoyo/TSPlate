@@ -30,3 +30,7 @@ test('Right models should transit according to the right template', () => {
 test('Right transits should convert to models according to the right template', () => {
   expect(TStringOrInt.toModel(3)).toBe(3);
 });
+
+test("Undefined doesn't validate", () => {
+  expect(TStringOrInt.valid(undefined)).toBe(false);
+});

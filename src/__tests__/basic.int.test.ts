@@ -8,6 +8,10 @@ test("Strings don't validate", () => {
   expect(TInt.valid('hello')).toBe(false);
 });
 
+test("Undefined doesn't validate", () => {
+  expect(TInt.valid(undefined)).toBe(false);
+});
+
 test("Floats don't validate", () => {
   expect(TInt.valid(3.4)).toBe(false);
 });

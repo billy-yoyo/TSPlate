@@ -52,3 +52,7 @@ test('Transit objects get mapped to left model type', () => {
   expect(model.name).toBe('hello');
   expect(model.age).toBe(3);
 });
+
+test("Undefined doesn't validate", () => {
+  expect(TExample.valid(undefined)).toBe(false);
+});

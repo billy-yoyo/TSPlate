@@ -123,3 +123,7 @@ test('Objects transits should create models with missing optional properties', (
   expect(transit).toHaveProperty('message');
   expect(transit.message).toBe('example-message');
 });
+
+test("Undefined doesn't validate", () => {
+  expect(TExample.valid(undefined)).toBe(false);
+});

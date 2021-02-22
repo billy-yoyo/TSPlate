@@ -36,3 +36,7 @@ test('Transits will be converted to objects', () => {
   expect(model).toHaveProperty('b');
   expect(model.b).toBe(2);
 });
+
+test("Undefined doesn't validate", () => {
+  expect(TLetterRecord.valid(undefined)).toBe(false);
+});

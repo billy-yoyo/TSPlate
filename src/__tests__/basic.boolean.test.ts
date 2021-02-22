@@ -12,6 +12,10 @@ test("Strings don't validate", () => {
   expect(TBoolean.valid('hello')).toBe(false);
 });
 
+test("Undefined doesn't validate", () => {
+  expect(TBoolean.valid(undefined)).toBe(false);
+});
+
 test('Booleans transit as booleans', () => {
   expect(TBoolean.toTransit(true)).toBe(true);
 });

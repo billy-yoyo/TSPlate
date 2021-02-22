@@ -10,6 +10,10 @@ test("Strings outsite enum shouldn't validate", () => {
   expect(TExample.valid('example')).toBe(false);
 });
 
+test("Undefined doesn't validate", () => {
+  expect(TExample.valid(undefined)).toBe(false);
+});
+
 test("Integers shouldn't validate with enum", () => {
   expect(TExample.valid(3)).toBe(false);
 });
