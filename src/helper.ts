@@ -2,7 +2,7 @@ import Template from './template';
 
 export function TOptional<M, T>(template: Template<M, T>): Template<M | undefined, T | undefined> {
   return {
-    valid: (o: any): o is undefined | T => o === undefined || template.valid(o),
+    valid: (o: any): o is undefined | T => o === undefined || o === null || template.valid(o),
     toModel: (o: undefined | T) => (o !== undefined ? template.toModel(o) : undefined),
     toTransit: (m: undefined | M) => (m !== undefined ? template.toTransit(m) : undefined),
   };
