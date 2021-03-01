@@ -13,7 +13,8 @@ export default function TClass<
   const templatearr = (templates as unknown) as NamedTemplate[];
 
   return {
-    valid: (o: any): o is any => typeof o === 'object' && o !== null && templatearr.every(([key, t]) => t.valid(o[key])),
+    valid: (o: any): o is any =>
+      typeof o === 'object' && o !== null && templatearr.every(([key, t]) => t.valid(o[key])),
     toModel: (o: any) => new cls(...templatearr.map(([key, t]) => t.toModel(o[key as keyof T]))),
     toTransit: (c: C) =>
       templatearr.reduce((obj: any, [key, t]) => ({ ...obj, [key]: t.toTransit((c as any)[key]) }), {}),

@@ -42,7 +42,7 @@ export default function TObject<
 >(template: TT): Template<M, T> {
   return {
     valid: (o: any): o is T =>
-    typeof o === 'object' && o !== null && Object.keys(template).every((name) => template[name].valid(o[name])),
+      typeof o === 'object' && o !== null && Object.keys(template).every((name) => template[name].valid(o[name])),
     toModel: (o: T): M => mapObject(o, (name) => template[name].toModel((o as any)[name])) as M,
     toTransit: (m: M): T => mapObject(m, (name) => template[name].toTransit((m as any)[name])) as T,
   };
