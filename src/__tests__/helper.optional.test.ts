@@ -11,7 +11,7 @@ test('Optional templates should validate undefined', () => {
   expect(TOptionalString.valid(undefined)).toBe(true);
 });
 
-test("Optional templates should validate null", () => {
+test('Optional templates should validate null', () => {
   expect(TOptionalString.valid(null)).toBe(true);
 });
 

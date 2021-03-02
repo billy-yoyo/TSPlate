@@ -33,5 +33,5 @@ export const TVoid: Template<void, void> = {
 export const TAny: Template<any, any> = {
   valid: (o: any): o is any => true,
   toModel: (o: any) => o,
-  toTransit: (o: any) => o
+  toTransit: (o: any) => o,
 };
