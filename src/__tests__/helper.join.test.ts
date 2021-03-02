@@ -56,3 +56,7 @@ test('Transit objects get mapped to left model type', () => {
 test("Undefined doesn't validate", () => {
   expect(TExample.valid(undefined)).toBe(false);
 });
+
+test("Null doesn't validate", () => {
+  expect(TExample.valid(null)).toBe(false);
+});

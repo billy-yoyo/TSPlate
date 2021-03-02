@@ -31,6 +31,10 @@ test("Undefined doesn't validate", () => {
   expect(TExample.valid(undefined)).toBe(false);
 });
 
+test("Null doesn't validate", () => {
+  expect(TExample.valid(null)).toBe(false);
+});
+
 test('Class instances transit as objects with constructor parameter names', () => {
   const transit = TExample.toTransit(new Example('hello', 3));
 

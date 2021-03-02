@@ -1,5 +1,5 @@
 import Template, { isTemplate } from './template';
-import { TVoid, TString, TInt, TFloat, TBoolean } from './basic';
+import { TVoid, TString, TInt, TFloat, TBoolean, TAny } from './basic';
 import TArray from './array';
 import TObject from './object';
 import TEnum from './enum';
@@ -13,6 +13,7 @@ export type TransitType<TT extends Template<any, any>> = TT extends Template<any
 
 const T = {
   Void: TVoid,
+  Any: TAny,
   String: TString,
   Int: TInt,
   Float: TFloat,

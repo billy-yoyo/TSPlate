@@ -1,4 +1,4 @@
-import { TBoolean } from '../basic';
+import { TBoolean, TString } from '../basic';
 
 test('True validates', () => {
   expect(TBoolean.valid(true)).toBe(true);
@@ -14,6 +14,10 @@ test("Strings don't validate", () => {
 
 test("Undefined doesn't validate", () => {
   expect(TBoolean.valid(undefined)).toBe(false);
+});
+
+test("Null doesn't validate", () => {
+  expect(TString.valid(null)).toBe(false);
 });
 
 test('Booleans transit as booleans', () => {

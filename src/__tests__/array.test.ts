@@ -67,3 +67,11 @@ test('Array transits convert to underlying types models', () => {
   expect(model).toHaveLength(1);
   expect(model[0].name).toBe('hello');
 });
+
+test("Undefined doesn't validate", () => {
+  expect(TStringArray.valid(undefined)).toBe(false);
+});
+
+test("Null doesn't validate", () => {
+  expect(TStringArray.valid(null)).toBe(false);
+});

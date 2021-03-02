@@ -14,6 +14,10 @@ test("Undefined doesn't validate", () => {
   expect(TExample.valid(undefined)).toBe(false);
 });
 
+test("Null doesn't validate", () => {
+  expect(TExample.valid(null)).toBe(false);
+});
+
 test("Integers shouldn't validate with enum", () => {
   expect(TExample.valid(3)).toBe(false);
 });

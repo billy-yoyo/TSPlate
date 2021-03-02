@@ -29,3 +29,9 @@ export const TVoid: Template<void, void> = {
   toModel: (o: any) => null,
   toTransit: (o: void) => o,
 };
+
+export const TAny: Template<any, any> = {
+  valid: (o: any): o is any => true,
+  toModel: (o: any) => o,
+  toTransit: (o: any) => o
+};

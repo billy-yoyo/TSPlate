@@ -12,6 +12,10 @@ test("Undefined doesn't validate", () => {
   expect(TInt.valid(undefined)).toBe(false);
 });
 
+test("Null doesn't validate", () => {
+  expect(TInt.valid(null)).toBe(false);
+});
+
 test("Floats don't validate", () => {
   expect(TInt.valid(3.4)).toBe(false);
 });

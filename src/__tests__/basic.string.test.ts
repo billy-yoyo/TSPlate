@@ -12,6 +12,10 @@ test("Undefined doesn't validate", () => {
   expect(TString.valid(undefined)).toBe(false);
 });
 
+test("Null doesn't validate", () => {
+  expect(TString.valid(null)).toBe(false);
+});
+
 test('Strings transit as strings', () => {
   expect(TString.toTransit('hello')).toBe('hello');
 });

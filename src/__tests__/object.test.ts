@@ -127,3 +127,7 @@ test('Objects transits should create models with missing optional properties', (
 test("Undefined doesn't validate", () => {
   expect(TExample.valid(undefined)).toBe(false);
 });
+
+test("Null doesn't validate", () => {
+  expect(TExample.valid(null)).toBe(false);
+});

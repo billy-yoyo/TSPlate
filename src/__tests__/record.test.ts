@@ -40,3 +40,7 @@ test('Transits will be converted to objects', () => {
 test("Undefined doesn't validate", () => {
   expect(TLetterRecord.valid(undefined)).toBe(false);
 });
+
+test("Null doesn't validate", () => {
+  expect(TLetterRecord.valid(null)).toBe(false);
+});

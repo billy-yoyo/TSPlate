@@ -16,6 +16,10 @@ test("Undefined doesn't validate", () => {
   expect(TFloat.valid(undefined)).toBe(false);
 });
 
+test("Null doesn't validate", () => {
+  expect(TFloat.valid(null)).toBe(false);
+});
+
 test('Floats transit as floats', () => {
   expect(TFloat.toTransit(3.2)).toBeCloseTo(3.2);
 });
