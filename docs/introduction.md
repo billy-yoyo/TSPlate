@@ -44,7 +44,7 @@ It also doesn't come with any dependancies, with TSPlate what-you-see-is-what-yo
     3. [Enums](./templates/enums.md)
     4. [Objects](./templates/objects.md)
     5. [Classes](./templates/classes.md)
-    6. [Map](./templates/map.md)
+    7. [Records](./templates/records.md)
 5. [Examples](./examples.md)
 
 ### [Next - Understanding templates →](./understanding-templates.md)

@@ -69,7 +69,7 @@ This way of defining classes via decorators is more verbose about what each argu
 
 There is a third way of defining class templates too, by defining the mapping yourself using `T.Map`. More about it in the next section.
 
-### [Next - Helper functions →](./helper.md)
+### [Next - Records →](./records.md)
 ### [← Previous - Objects](../objects.md)
 ### [← Built in templates](../built-in-templates.md)
 ### [🏠 Home](../introduction.md)

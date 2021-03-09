@@ -82,6 +82,6 @@ const TStringOrInt: Template<string | number, string | number> = T.Union(
 Union works best when the types of the templates are disjoint, but there is no requirement for them to be so (it will prioritise using the first template given in the case where both templates match a model or transit).
 
 ### [Next - Examples →](../examples.md)
-### [← Previous - Classes](../classes.md)
+### [← Previous - Records](../records.md)
 ### [← Built in templates](../built-in-templates.md)
 ### [🏠 Home](../introduction.md)

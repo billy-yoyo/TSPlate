@@ -10,7 +10,8 @@ TSPlate's main value comes from the templates and template helper functions buil
 3. [Enums](./templates/enums.md)
 5. [Objects](./templates/objects.md)
 4. [Classes](./templates/classes.md)
-5. [Helper Functions](./templates/helper.md)
+5. [Records](./templates/records.md)
+6. [Helper Functions](./templates/helper.md)
 
 ### [Next - Basic Types →](./templates/basic-types.md)
 ### [← Previous - Creating a basic template](./creating-a-basic-template.md)
