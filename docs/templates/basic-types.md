@@ -9,6 +9,8 @@ The basic type templates act primarily as identity templates which simply valida
 4. `T.Boolean : Template<boolean, boolean>`
 5. `T.Void : Template<void, void>` - this is a template which never validates
 6. `T.Any : Template<void, void>` - this is a template which always validates
+7. `T.Date : Template<Date, string>` - dates transit as datestrings
+8. `T.Time : Template<Date, number>` - dates transit as timestamps
 
 These are generally the foundational types of any template, and are generally derived from the basic types of JSON.
 
