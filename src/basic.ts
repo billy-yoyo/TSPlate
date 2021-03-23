@@ -39,11 +39,11 @@ export const TAny: Template<any, any> = {
 export const TDate: Template<Date, string> = {
   valid: (o: any): o is string => typeof o === 'string' && !isNaN(Date.parse(o)),
   toModel: (o: string) => new Date(o),
-  toTransit: (d: Date) => d.toISOString()
+  toTransit: (d: Date) => d.toISOString(),
 };
 
 export const TTime: Template<Date, number> = {
   valid: (o: any): o is number => typeof o === 'number' && !isNaN(new Date(o).getTime()),
   toModel: (o: number) => new Date(o),
-  toTransit: (d: Date) => d.getTime()
+  toTransit: (d: Date) => d.getTime(),
 };
