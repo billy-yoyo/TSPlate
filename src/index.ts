@@ -1,5 +1,5 @@
 import Template, { isTemplate } from './template';
-import { TVoid, TString, TInt, TFloat, TBoolean, TAny } from './basic';
+import { TVoid, TString, TInt, TFloat, TBoolean, TAny, TDate, TTime } from './basic';
 import TArray from './array';
 import TObject from './object';
 import TEnum from './enum';
@@ -18,6 +18,8 @@ const T = {
   Int: TInt,
   Float: TFloat,
   Boolean: TBoolean,
+  Date: TDate,
+  Time: TTime,
   Array: TArray,
   Object: TObject,
   Record: TRecord,
