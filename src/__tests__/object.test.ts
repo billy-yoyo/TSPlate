@@ -134,31 +134,29 @@ test("Null doesn't validate", () => {
   expect(TExample.valid(null)).toBe(false);
 });
 
-test("Full objects are validated by partial object templates", () => {
+test('Full objects are validated by partial object templates', () => {
   expect(
     TPartial.valid({
       name: 'example-name',
       message: 'example-message',
-      age: 3
-    })
+      age: 3,
+    }),
   ).toBe(true);
 });
 
-test("Partial objects are validated by partial object templates", () => {
+test('Partial objects are validated by partial object templates', () => {
   expect(
     TPartial.valid({
-      message: 'example-message'
-    })
+      message: 'example-message',
+    }),
   ).toBe(true);
 });
 
-test("Empty objects are validated by partial object templates", () => {
-  expect(
-    TPartial.valid({})
-  ).toBe(true);
+test('Empty objects are validated by partial object templates', () => {
+  expect(TPartial.valid({})).toBe(true);
 });
 
-test("Partial transits map to models", () => {
+test('Partial transits map to models', () => {
   const model = TPartial.toModel({
     message: 'example-message',
     age: 3,
@@ -169,7 +167,7 @@ test("Partial transits map to models", () => {
   expect(model.message).toBe('example-message');
 });
 
-test("Partial models map to transits", () => {
+test('Partial models map to transits', () => {
   const transit = TPartial.toTransit({
     message: 'example-message',
   });

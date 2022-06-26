@@ -1,4 +1,4 @@
-import { TOptional } from "./helper";
+import { TOptional } from './helper';
 
 export default interface Template<M, T> {
   valid: (o: any) => o is T;
@@ -15,6 +15,6 @@ export const toPartial = <M, T>(template: Template<M, T>): Template<Partial<M>, 
   if (template.toPartialTemplate) {
     return template.toPartialTemplate();
   } else {
-    return template as any as Template<Partial<M>, Partial<T>>;
+    return (template as any) as Template<Partial<M>, Partial<T>>;
   }
 };

@@ -51,7 +51,7 @@ export default function TObject<
       Object.entries(template).forEach(([key, t]) => {
         obj[key] = TOptional(toPartial(t));
       });
-      return TObject(obj) as any as Template<Partial<M>, Partial<T>>;
-    }
+      return (TObject(obj) as any) as Template<Partial<M>, Partial<T>>;
+    },
   };
 }
