@@ -1,5 +1,5 @@
 import { TOptional } from './helper';
-import Template, { toPartial } from './template';
+import Template, { DeepPartial, toPartial } from './template';
 
 type ModelType<TT> = TT extends Template<infer M, any> ? M : never;
 type TransitType<TT> = TT extends Template<any, infer T> ? T : never;
@@ -51,7 +51,7 @@ export default function TObject<
       Object.entries(template).forEach(([key, t]) => {
         obj[key] = TOptional(toPartial(t));
       });
-      return (TObject(obj) as any) as Template<Partial<M>, Partial<T>>;
+      return (TObject(obj) as any) as Template<DeepPartial<M>, DeepPartial<T>>;
     },
   };
 }

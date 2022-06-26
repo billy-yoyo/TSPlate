@@ -1,4 +1,4 @@
-import Template, { isTemplate, toPartial } from './template';
+import Template, { isTemplate, toPartial, DeepPartial } from './template';
 import { TVoid, TString, TInt, TFloat, TBoolean, TAny, TDate, TTime } from './basic';
 import TArray from './array';
 import TObject from './object';
@@ -35,4 +35,4 @@ const T = {
 };
 
 export default T;
-export { Template, isTemplate };
+export { Template, isTemplate, DeepPartial };
