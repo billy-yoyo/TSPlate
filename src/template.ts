@@ -1,4 +1,4 @@
-
+/* tslint:disable:ban-types */
 export type DeepPartial<T> = T extends Object
   ? {
       [K in keyof T]?: DeepPartial<T[K]>;
