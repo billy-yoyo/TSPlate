@@ -1,4 +1,5 @@
-import Template from './template';
+import { TOptional } from './helper';
+import Template, { toPartial } from './template';
 
 type ModelType<TT> = TT extends Template<infer M, any> ? M : never;
 type TransitType<TT> = TT extends Template<any, infer T> ? T : never;
@@ -45,5 +46,12 @@ export default function TObject<
       typeof o === 'object' && o !== null && Object.keys(template).every((name) => template[name].valid(o[name])),
     toModel: (o: T): M => mapObject(o, (name) => template[name].toModel((o as any)[name])) as M,
     toTransit: (m: M): T => mapObject(m, (name) => template[name].toTransit((m as any)[name])) as T,
+    toPartialTemplate: () => {
+      const obj: any = {};
+      Object.entries(template).forEach(([key, t]) => {
+        obj[key] = TOptional(toPartial(t));
+      });
+      return TObject(obj) as any as Template<Partial<M>, Partial<T>>;
+    }
   };
 }
