@@ -31,7 +31,7 @@ const T = {
   AutoClass: TAutoClass,
   template,
   constructor,
-  toPartial
+  toPartial,
 };
 
 export default T;
