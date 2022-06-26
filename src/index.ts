@@ -1,4 +1,4 @@
-import Template, { isTemplate } from './template';
+import Template, { isTemplate, toPartial } from './template';
 import { TVoid, TString, TInt, TFloat, TBoolean, TAny, TDate, TTime } from './basic';
 import TArray from './array';
 import TObject from './object';
@@ -31,6 +31,7 @@ const T = {
   AutoClass: TAutoClass,
   template,
   constructor,
+  toPartial
 };
 
 export default T;
