@@ -27,7 +27,10 @@ export default function TRecord<KT extends string | number, KM extends string | 
       return transit;
     },
     toPartialTemplate: () => {
-      return TRecord(keyTemplate, toPartial(valueTemplate)) as any as Template<DeepPartial<PRecord<KM, VM>>, DeepPartial<PRecord<KT, VT>>>;
-    }
+      return (TRecord(keyTemplate, toPartial(valueTemplate)) as any) as Template<
+        DeepPartial<PRecord<KM, VM>>,
+        DeepPartial<PRecord<KT, VT>>
+      >;
+    },
   };
 }

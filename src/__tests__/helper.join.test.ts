@@ -62,6 +62,6 @@ test("Null doesn't validate", () => {
   expect(TExample.valid(null)).toBe(false);
 });
 
-test("Partial objects validate for partial joins", () => {
+test('Partial objects validate for partial joins', () => {
   expect(TPartialExample.valid({ name: 'hello' }));
 });

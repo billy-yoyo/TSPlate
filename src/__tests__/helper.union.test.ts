@@ -5,7 +5,13 @@ import { toPartial } from '../template';
 
 const TStringOrInt = TUnion(TString, TInt, (m): m is string => typeof m === 'string');
 
-const TPartialUnion = toPartial(TUnion(TObject({ type: TString, a: TString }), TObject({ type: TString, b: TString }), (m): m is { type: string, a: string } => m.type === "a"));
+const TPartialUnion = toPartial(
+  TUnion(
+    TObject({ type: TString, a: TString }),
+    TObject({ type: TString, b: TString }),
+    (m): m is { type: string; a: string } => m.type === 'a',
+  ),
+);
 
 test('Union templates should validate on left type', () => {
   expect(TStringOrInt.valid('hello')).toBe(true);
@@ -43,7 +49,7 @@ test("Null doesn't validate", () => {
   expect(TStringOrInt.valid(null)).toBe(false);
 });
 
-test("Partial objects validate within partial unions", () => {
-  expect(TPartialUnion.valid({ type: "a" })).toBe(true);
-  expect(TPartialUnion.valid({ type: "b" })).toBe(true);
+test('Partial objects validate within partial unions', () => {
+  expect(TPartialUnion.valid({ type: 'a' })).toBe(true);
+  expect(TPartialUnion.valid({ type: 'b' })).toBe(true);
 });

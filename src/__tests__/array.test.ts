@@ -79,6 +79,6 @@ test("Null doesn't validate", () => {
   expect(TStringArray.valid(null)).toBe(false);
 });
 
-test("Partial objects within an array are allowed on partial array templates", () => {
-  expect(TPartialArray.valid([{ a: "hello" }])).toBe(true);
+test('Partial objects within an array are allowed on partial array templates', () => {
+  expect(TPartialArray.valid([{ a: 'hello' }])).toBe(true);
 });

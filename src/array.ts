@@ -6,7 +6,7 @@ export default function TArray<R, T>(item: Template<R, T>): Template<R[], T[]> {
     toModel: (o: T[]) => o.map(item.toModel),
     toTransit: (items: R[]) => items.map(item.toTransit),
     toPartialTemplate: () => {
-      return TArray(toPartial(item)) as any as Template<DeepPartial<R[]>, DeepPartial<T[]>>;
-    }
+      return (TArray(toPartial(item)) as any) as Template<DeepPartial<R[]>, DeepPartial<T[]>>;
+    },
   };
 }

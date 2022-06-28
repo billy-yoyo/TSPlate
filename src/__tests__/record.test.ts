@@ -49,6 +49,6 @@ test("Null doesn't validate", () => {
   expect(TLetterRecord.valid(null)).toBe(false);
 });
 
-test("Partial objects within a record are allowed on partial record template", () => {
-  expect(TPartialRecord.valid({ example: { a: "test" } })).toBe(true);
+test('Partial objects within a record are allowed on partial record template', () => {
+  expect(TPartialRecord.valid({ example: { a: 'test' } })).toBe(true);
 });
