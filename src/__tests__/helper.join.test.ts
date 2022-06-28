@@ -1,4 +1,4 @@
-import Template from '../template';
+import Template, { toPartial } from '../template';
 import { TJoin } from '../helper';
 import TObject from '../object';
 import { TString, TInt } from '../basic';
@@ -25,6 +25,7 @@ const TExampleData: Template<Example, { name: string; age: number }> = {
 };
 
 const TExample = TJoin(TExampleData, TExampleObj);
+export const TPartialExample = toPartial(TExample);
 
 test('Join validates based on underlying validation', () => {
   // compiled into single test, since if individual components of these are failing
@@ -59,4 +60,8 @@ test("Undefined doesn't validate", () => {
 
 test("Null doesn't validate", () => {
   expect(TExample.valid(null)).toBe(false);
+});
+
+test("Partial objects validate for partial joins", () => {
+  expect(TPartialExample.valid({ name: 'hello' }));
 });

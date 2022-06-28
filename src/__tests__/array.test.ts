@@ -1,6 +1,7 @@
-import Template from '../template';
+import Template, { toPartial } from '../template';
 import { TString } from '../basic';
 import TArray from '../array';
+import TObject from '../object';
 
 const TStringArray = TArray(TString);
 
@@ -17,6 +18,8 @@ const TName: Template<Name, string> = {
   toTransit: (name: Name) => name.name,
 };
 const TNameArray = TArray(TName);
+
+const TPartialArray = toPartial(TObject({ a: TString, b: TString }));
 
 test('Empty list validates', () => {
   expect(TStringArray.valid([])).toBe(true);
@@ -74,4 +77,8 @@ test("Undefined doesn't validate", () => {
 
 test("Null doesn't validate", () => {
   expect(TStringArray.valid(null)).toBe(false);
+});
+
+test("Partial objects within an array are allowed on partial array templates", () => {
+  expect(TPartialArray.valid([{ a: "hello" }])).toBe(true);
 });

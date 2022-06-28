@@ -1,4 +1,4 @@
-import Template from './template';
+import Template, { DeepPartial, toPartial } from './template';
 
 export function TOptional<M, T>(template: Template<M, T>): Template<M | undefined, T | undefined> {
   return {
@@ -21,6 +21,9 @@ export function TJoin<M, S, T>(left: Template<M, S>, right: Template<S, T>): Tem
     valid: right.valid,
     toModel: (o: T) => left.toModel(right.toModel(o)),
     toTransit: (m: M) => right.toTransit(left.toTransit(m)),
+    toPartialTemplate: () => {
+      return TJoin(toPartial(left), toPartial(right));
+    }
   };
 }
 
@@ -33,5 +36,8 @@ export function TUnion<M1, T1, M2, T2>(
     valid: (o: any): o is T1 | T2 => left.valid(o) || right.valid(o),
     toModel: (o: T1 | T2) => (left.valid(o) ? left.toModel(o) : right.toModel(o)),
     toTransit: (m: M1 | M2) => (isLeft(m) ? left.toTransit(m) : right.toTransit(m)),
+    toPartialTemplate: () => {
+      return TUnion(toPartial(left), toPartial(right), isLeft as any as (m: DeepPartial<M1> | DeepPartial<M2>) => m is DeepPartial<M1>);
+    }
   };
 }

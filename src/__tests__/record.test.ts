@@ -1,9 +1,13 @@
 import TRecord from '../record';
 import TEnum from '../enum';
-import { TInt } from '../basic';
+import { TInt, TString } from '../basic';
+import { toPartial } from '../template';
+import TObject from '../object';
 
 const TLetter = TEnum('a', 'b', 'c');
 const TLetterRecord = TRecord(TLetter, TInt);
+
+const TPartialRecord = toPartial(TRecord(TString, TObject({ a: TString, b: TString })));
 
 test('Validates if all keys and values match templates', () => {
   expect(TLetterRecord.valid({ a: 1, b: 2 })).toBe(true);
@@ -43,4 +47,8 @@ test("Undefined doesn't validate", () => {
 
 test("Null doesn't validate", () => {
   expect(TLetterRecord.valid(null)).toBe(false);
+});
+
+test("Partial objects within a record are allowed on partial record template", () => {
+  expect(TPartialRecord.valid({ example: { a: "test" } })).toBe(true);
 });

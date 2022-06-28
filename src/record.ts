@@ -1,4 +1,4 @@
-import Template from './template';
+import Template, { DeepPartial, toPartial } from './template';
 
 type PRecord<K extends string | number, V> = Partial<Record<K, V>>;
 
@@ -26,5 +26,8 @@ export default function TRecord<KT extends string | number, KM extends string | 
       });
       return transit;
     },
+    toPartialTemplate: () => {
+      return TRecord(keyTemplate, toPartial(valueTemplate)) as any as Template<DeepPartial<PRecord<KM, VM>>, DeepPartial<PRecord<KT, VT>>>;
+    }
   };
 }
