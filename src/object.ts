@@ -27,16 +27,15 @@ type UnwrapTransitTypes<TT extends { [key: string]: Template<any, any> }> = Sepe
 >;
 
 function mapObject<T>(object: T, func: (key: string) => any) {
-  return Object.keys(object).reduce(
-    (o, key) => {
-      const value = func(key);
-      return value === undefined ? o : {
-        ...o,
-        [key]: value,
-      };
-    },
-    {},
-  );
+  return Object.keys(object).reduce((o, key) => {
+    const value = func(key);
+    return value === undefined
+      ? o
+      : {
+          ...o,
+          [key]: value,
+        };
+  }, {});
 }
 
 export default function TObject<
