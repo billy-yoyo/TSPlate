@@ -28,10 +28,13 @@ type UnwrapTransitTypes<TT extends { [key: string]: Template<any, any> }> = Sepe
 
 function mapObject<T>(object: T, func: (key: string) => any) {
   return Object.keys(object).reduce(
-    (o, key) => ({
-      ...o,
-      [key]: func(key),
-    }),
+    (o, key) => {
+      const value = func(key);
+      return value === undefined ? o : {
+        ...o,
+        [key]: value,
+      };
+    },
     {},
   );
 }
@@ -44,8 +47,8 @@ export default function TObject<
   return {
     valid: (o: any): o is T =>
       typeof o === 'object' && o !== null && Object.keys(template).every((name) => template[name].valid(o[name])),
-    toModel: (o: T): M => mapObject(o, (name) => template[name].toModel((o as any)[name])) as M,
-    toTransit: (m: M): T => mapObject(m, (name) => template[name].toTransit((m as any)[name])) as T,
+    toModel: (o: T): M => mapObject(template, (name) => template[name].toModel((o as any)[name])) as M,
+    toTransit: (m: M): T => mapObject(template, (name) => template[name].toTransit((m as any)[name])) as T,
     toPartialTemplate: () => {
       const obj: any = {};
       Object.entries(template).forEach(([key, t]) => {
